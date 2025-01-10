@@ -1,5 +1,5 @@
-const dotenv = require('dotenv');
-dotenv.config({ path: './.env' });
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
 const mongoose = require("mongoose");
 
 const DB = process.env.DATABASE_URL.replace(
@@ -8,10 +8,7 @@ const DB = process.env.DATABASE_URL.replace(
 );
 
 mongoose
-  .connect(DB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(DB)
   .then(() => console.log("DB connection successful!"))
   .catch((e) => {
     console.log(e.message);

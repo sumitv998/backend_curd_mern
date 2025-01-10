@@ -13,7 +13,7 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
 
 exports.addUser = catchAsync(async (req, res, next) => {
   // console.log("req",req);
-  
+
   const user = await User.create({
     name: req.body.name,
     email: req.body.email,
@@ -37,40 +37,40 @@ exports.addUser = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getUserFromId = catchAsync(async(req,res,next)=> {
-    // console.log(`${req.params.id} req.query.id`);
-    
-    const user = await User.findById(req.params.id);
+exports.getUserFromId = catchAsync(async (req, res, next) => {
+  // console.log(`${req.params.id} req.query.id`);
 
-    if (!user) {
-        return next(new AppError("Please provide correct details of User!", 404));
-    }
+  const user = await User.findById(req.params.id);
 
-    res.status(201).json(user);
-})
+  if (!user) {
+    return next(new AppError("Please provide correct details of User!", 404));
+  }
 
-exports.getUserUpdateById= catchAsync(async(req,res,next)=> {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-        runValidators: true,
-      });
-    
-      if (!user) {
-        return next(new AppError("No user found with that ID", 404));
-      }
-    
-      res.status(200).json(user);
-})
+  res.status(201).json(user);
+});
 
-exports.deleteUserById= catchAsync(async(req,res,next)=> {
-    const user = await User.findByIdAndDelete(req.params.id);
-    
-      if (!user) {
-        return next(new AppError("Please provide a vail ID", 404));
-      }
-    
-      res.status(200).json({
-        status: "success",
-        message: "deleted successfully!"
-      });
-})
+exports.getUserUpdateById = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!user) {
+    return next(new AppError("No user found with that ID", 404));
+  }
+
+  res.status(200).json(user);
+});
+
+exports.deleteUserById = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndDelete(req.params.id);
+
+  if (!user) {
+    return next(new AppError("Please provide a vail ID", 404));
+  }
+
+  res.status(200).json({
+    status: "success",
+    message: "deleted successfully!",
+  });
+});
